@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import max.PI.eventos.models.Evento;
+import max.PI.eventos.repositories.EventoRepository;
 
 @Controller
 public class EventosControler {
@@ -22,6 +23,7 @@ public class EventosControler {
 	public String adicionar(Evento evento) {
 		
 		System.out.println(evento);
+		er.save(evento);
 		
 		return "evento-adicionado";
 	

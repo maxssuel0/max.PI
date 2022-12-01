@@ -15,14 +15,37 @@
 	
 	<div class="row">
     <div class="col s12 ">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
+      <div class="card">
+        <div class="card-content">
           <span class="card-title">Evento</span>
           <p> <strong> Id: </strong> <span th: text="${evento.id}">1</span>  </p>
           <p> <strong> Nome: </strong> <span th: text="${evento.noome}">Niver do Jão</span>  </p>
           <p> <strong> Local: </strong> <span th: text="${evento.local}">Clube</span>  </p>
           <p> <strong> Data: </strong> <span th: text="${evento.data}">25/02/2023</span>  </p>
           <p> <strong> Horário: </strong> <span th: text="${evento.harario}">19:00</span>  </p>
+        </div>   
+      </div>
+    </div>
+  </div>
+	
+	<div class="row">
+    <div class="col s12 ">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Adicionar convidado</span>
+          <form>
+          <div>
+          		<label>Nome: </label> <input type="text" name="nome"> 
+           </div>
+           <div>
+          		<label>RG: </label> <input type="text" name="rg"> 
+           </div>
+           <div>
+          		<buton type="submit" class="btn"> Salvar </buton> 
+          		<buton type="reset" class="btn"> Limpar </buton> 
+           </div>
+           
+          </form>
         </div>   
       </div>
     </div>

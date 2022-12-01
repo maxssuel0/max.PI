@@ -1,6 +1,7 @@
 package max.PI.eventos.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import max.PI.eventos.models.Evento;
+import max.PI.eventos.repositories.ConvidadoRepository;
 import max.PI.eventos.repositories.EventoRepository;
 
 @Controller
@@ -19,6 +21,8 @@ public class EventosControler {
 
 	@Autowired
 	private EventoRepository er;
+	@Autowired
+	private ConvidadoRepository er;
 
 	@GetMapping("/form")
 	public String form() {
@@ -58,6 +62,24 @@ public class EventosControler {
 		md.addObject("evento", evento);
 
 		return md;
+	}
+	
+	@PostMapping("/{idEvento}")
+	public String salvarConvidado(@PathVariable Long idEvento, max.PI.eventos.models.convidado convidado) {
+		
+		System.out.println("id do evento: " + idEvento);
+		System.out.println(convidado);
+		
+		Optional<Evento> opt = er.findById(idEvento);
+		if(opt.isEmpty()) {
+			return "redirect:/eventos";
+		}
+		
+		Evento evento = opt.get();
+		convidado.setEvento(evento);
+		
+		return "redirect:/eventos/{idEvento}";
+		
 	}
 
 }

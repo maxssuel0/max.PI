@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> Evento de Max </title>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<title>Eventos</title>
 </head>
 <style>
-	body{
+body {
 	background: black;
-            color: aliceblue;
-            font: normal 20pt times;
-	}
+	color: aliceblue;
+	font: normal 20pt times;
+}
 </style>
 <body>
-<h1> Hello world  </h1>
-<h2> Graças a Deus deu Certo </h2>
-<p> Finalmente livre da maldição, eita como eu tô de boa! 
-Espero continuar de boa pq se ficar mais difícil não vai dar. 
-<p>
-<p> 
-	Não tÔ mais de boa T-T
-</p>
+
+	<div th:replace="~(menu :: menu)"></div>
+
+	<div class="container">
+	<h1>Olá, seja muito bem vindo a aplicação</h1>
+	<h2>Graças a Deus deu Certo</h2>
+	</div>
 </body>
 </html>

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> Isso é para Eventos </title>
+<title>Isso é para Eventos</title>
 </head>
-	<style>
-	body{
+<style>
+body {
 	background: black;
-            color: white;
-            font: times 20pt times;
-	}
+	color: white;
+	font: times 20pt times;
+}
 </style>
 <body>
-	<h1>Add Evento</h1>
+	<div th:replace="~(menu :: menu)"></div>
+	<div class="container">
 
 	<form action="/eventos" method="post">
 
@@ -29,10 +30,10 @@
 			<label>horário:</label> <input type="text" name="horario">
 		</div>
 		<div>
-			<button type="submit">Salvar </button>
-			<button type="reset">Limpar</button>
+			<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+			<button class="waves-effect waves-light btn" type="reset">Limpar</button>
 		</div>
-		
 	</form>
+	</div>
 </body>
 </html>

@@ -78,6 +78,8 @@ public class EventosControler {
 		Evento evento = opt.get();
 		convidado.setEvento(evento);
 		
+		er.save(convidado);
+		
 		return "redirect:/eventos/{idEvento}";
 		
 	}

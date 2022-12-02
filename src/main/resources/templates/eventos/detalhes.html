@@ -33,12 +33,15 @@
       <div class="card">
         <div class="card-content">
           <span class="card-title">Adicionar convidado</span>
-          <form>
+          <form action="@{/eventos/{idEvento}(idEvento=${evento.id})}" method="post">
+          	<div>
+          		<input type="hidden" name="id" th:value"${convidado.id}" readonly="readonly">
+          	</div>
           <div>
-          		<label>Nome: </label> <input type="text" name="nome"> 
+          		<label>Nome: </label> <input type="text" name="nome" th:value="${convidado.nome}"> 
            </div>
            <div>
-          		<label>RG: </label> <input type="text" name="rg"> 
+          		<label>RG: </label> <input type="text" name="rg" th:value="${convidado.rg}"> 
            </div>
            <div>
           		<buton type="submit" class="btn"> Salvar </buton> 
@@ -61,6 +64,11 @@
           	<td th:text="${c.id}">1</td>
           	<td th:text="${c.nome}">Fernando soares</td>
           	<td th:text="${c.rg}">123</td>
+          	
+          	<a th;href="@{/eventos/{idEvento}/convidados/{idConvidado}/selecionar(idEvento=${evento.id}, idConvidado=${c.id})"> <i class "material-icons">edit</i></a>
+          	<a
+          	th:href="@{/eventos/{idEvento}/convidados/{idConvidado}/remover(idEventos=${evento.id},idConvidado=${c.id})}"><i
+          	class "material-icons">Delete</i></a>
           </tr>
           </tbody>
           </table>

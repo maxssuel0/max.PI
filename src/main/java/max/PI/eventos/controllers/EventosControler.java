@@ -60,7 +60,10 @@ public class EventosControler {
 		Evento evento = opt.get();
 
 		md.addObject("evento", evento);
-
+			
+		List<Convidado> convidados = er.findByEvento(evento);
+		md.addObject("convidados", convidado);
+		
 		return md;
 	}
 	
@@ -77,6 +80,8 @@ public class EventosControler {
 		
 		Evento evento = opt.get();
 		convidado.setEvento(evento);
+		
+		er.save(convidado);
 		
 		return "redirect:/eventos/{idEvento}";
 		

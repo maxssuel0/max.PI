@@ -21,6 +21,7 @@
 		<th>Local</th>
 		<th>Data</th>
 		<th>Horário</th>
+		<th></th>
 		</tr>
 			<tbody>
 			<tr th:each="e : ${eventos}">
@@ -29,6 +30,7 @@
 				<td th:text="${e.local}">Clube</td>
 				<td th:text="${e.data}">25/02/2023</td>
 				<td th:text="${e.horario}">19:00</td>
+				<td><a th:href="@{/eventos/{id}/remover(id=${e.id})}"> deletar</a></td>
 			</tr>
 			</tbody>
 		</thead>

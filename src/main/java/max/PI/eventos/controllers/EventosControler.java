@@ -23,19 +23,21 @@ public class EventosControler {
 	private EventoRepository er;
 	@Autowired
 	private ConvidadoRepository er;
+	private Long id;
+	private Optional<Evento> findById;
 
 	@GetMapping("/form")
-	public String form() {
+	public String form(Evento evento) {
 		return "eventos/formEvento";
 	}
 
 	@PostMapping
-	public String adicionar(Evento evento) {
+	public String salvar(Evento evento) {
 
 		System.out.println(evento);
 		er.save(evento);
 
-		return "eventos/evento-adicionado";
+		return "redirect:/eventos";
 	}
 
 	@GetMapping
@@ -48,7 +50,7 @@ public class EventosControler {
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView detalhar(@PathVariable Long id) {
+	public ModelAndView detalhar(@PathVariable Long id, Convidado convidado) {
 
 		Optional<Evento> opt = er.findById(id);
 		if (opt.isEmpty()) {
@@ -87,13 +89,59 @@ public class EventosControler {
 		
 	}
 	
+	@GetMapping("/{id}/selecionar")
+	public ModelAndView selecionarEvento() {
+		ModelAndView md = new ModelAndView();
+		Optional<Evento> opt = er.findById(id);
+		if(opt.isEmpty()) {
+			md.setViewName("redirect:/eventos");
+			return md;
+		}
+		
+		Evento evento = opt.get();
+		md.setViewName("eventos/formEvento");
+		md.addObject("evento", evento);
+		
+		return md;
+	}
+	
+	@GetMapping("/{idEvento}/convidados/{idConvidado}/selecionar")
+	public ModelAndView selecionarConvidado(@PathVariable Long idEvento, @PathVariable Long idConvidado) {
+		ModelAndView md = new ModelAndView();
+		
+		Optional<Evento> optEvento = er.findById(idEvento);
+		Optional<Evento> optConvidado = cr.findById(id);
+		
+		if(optEvento.isEmpty() || optConvidado.isEmpty()) {
+			md.setViewName("redirect:/eventos");
+			return md;
+		}
+		
+		Evento evento = optEvento.get();
+		max.PI.eventos.models.convidado convidado = optConvidado.get();
+		
+		if(evento.getId() != convidado.getEvento().getId()) {
+			return md;
+		}
+		
+		md.setViewName("eventos/detalhes");
+		md.addObject("convidado", convidado);
+		md.addObject("evento", evento);
+		md.addObject("convidado", cr.findByEvento(evento));
+		
+		return md;
+	}
+	
 	@GetMapping("/{id}/remover")
 	public String apagarEvento(@PathVariable Long id) {
 		
 		Optional<Evento> opt = er.findById(id);
 		
 		if(!opt.isEmpty()) {
-		
+			
+			List<Convidado> convidados = cr.findByEvento(evento);
+			
+			cr.deleteAll(convidados);
 			er.delete(opt.get());
 	}
 	

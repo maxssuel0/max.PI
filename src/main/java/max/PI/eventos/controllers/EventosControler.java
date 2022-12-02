@@ -60,7 +60,10 @@ public class EventosControler {
 		Evento evento = opt.get();
 
 		md.addObject("evento", evento);
-
+			
+		List<Convidado> convidados = er.findByEvento(evento);
+		md.addObject("convidados", convidado);
+		
 		return md;
 	}
 	
